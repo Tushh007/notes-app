@@ -4,9 +4,10 @@ const chalk = require('chalk')
 
 var error = chalk.red.inverse
 var success = chalk.green.inverse
+var header = chalk.yellow.inverse
 
 const getNotes = () => {
-    return "Your notes..."
+    console.log('Your notes...')
 }
 
 const addNote = (title, body) => {
@@ -29,6 +30,14 @@ const addNote = (title, body) => {
     }
     
     
+}
+
+const listNotes = () => {
+    const notes = loadNotes()
+
+    console.log(header('Your notes:'))
+
+    loadNotes().forEach((note) => console.log('- ' + note.title) )
 }
 
 const removeNote = (title) => {
@@ -64,5 +73,6 @@ const loadNotes = () => {
 module.exports = {
     getNotes: getNotes,
     addNote: addNote,
-    removeNote: removeNote
+    removeNote: removeNote,
+    listNotes: listNotes
 }
