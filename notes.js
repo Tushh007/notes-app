@@ -7,10 +7,6 @@ var success = chalk.green.inverse
 var header = chalk.bold.yellow.inverse
 var body = chalk.italic
 
-const getNotes = () => {
-    console.log('Your notes...')
-}
-
 const addNote = (title, body) => {
     
     const notes = loadNotes()
@@ -85,7 +81,6 @@ const loadNotes = () => {
 }
 
 module.exports = {
-    getNotes: getNotes,
     addNote: addNote,
     removeNote: removeNote,
     listNotes: listNotes,
