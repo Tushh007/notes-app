@@ -4,7 +4,8 @@ const chalk = require('chalk')
 
 var error = chalk.red.inverse
 var success = chalk.green.inverse
-var header = chalk.yellow.inverse
+var header = chalk.bold.yellow.inverse
+var body = chalk.italic
 
 const getNotes = () => {
     console.log('Your notes...')
@@ -13,10 +14,9 @@ const getNotes = () => {
 const addNote = (title, body) => {
     
     const notes = loadNotes()
+    const duplicateNote = notes.find((note) => notes.title === title)
 
-    const duplicateNotes = notes.filter((note) => note.title === title)
-
-    if (duplicateNotes.length === 0) {
+    if (!duplicateNote) {
         notes.push({
             title: title,
             body: body
@@ -29,6 +29,20 @@ const addNote = (title, body) => {
         console.log(error('Note Already Taken!'))
     }
     
+    
+}
+
+const readNote = (title) => {
+    const notes = loadNotes()
+    const note = notes.find((note) => note.title === title)
+
+    if (note) {
+        console.log(header(note.title))
+        console.log(body(note.body))
+    } else {
+        console.log(error("Note not found!"))
+    }
+
     
 }
 
@@ -74,5 +88,6 @@ module.exports = {
     getNotes: getNotes,
     addNote: addNote,
     removeNote: removeNote,
-    listNotes: listNotes
+    listNotes: listNotes,
+    readNote: readNote
 }
